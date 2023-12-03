@@ -1,6 +1,4 @@
-import numpy as np
 from word2number import w2n
-
 
 def day1_f(filename):
     result = 0
