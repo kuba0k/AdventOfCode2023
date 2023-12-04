@@ -9,6 +9,7 @@ coded_input = [
     "Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11",
 ]
 
+
 def one_star(filename):
     coded_input = open(filename, "r").read().split("\n")
     result = 0
@@ -20,6 +21,7 @@ def one_star(filename):
                 matching += 1
         result += 2**matching if matching != -1 else 0
     return result
+
 
 def two_stars(filename):
     coded_input = open(filename, "r").read().split("\n")
@@ -36,6 +38,20 @@ def two_stars(filename):
             for i in range(1, matching + 1):
                 cards_added[card_number + i] += 1
     return result
+
+
+def two_stars(filename):
+    coded_input = open(filename, "r").read().split("\n")
+    cards_added = defaultdict(lambda: 1)
+    for card_number, line in enumerate(coded_input):
+        cards_added[card_number] += 0
+        matching = 1
+        [winning, elfs] = [numbers.split() for numbers in line.split(":")[1].split("|")]
+        for number in winning:
+            if number in elfs:
+                cards_added[card_number + matching] += cards_added[card_number]
+                matching += 1
+    return sum(cards_added.values())
 
 
 # print(one_star("day4_input.txt"))
